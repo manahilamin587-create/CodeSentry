@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 from app.models.finding import Finding
 from app.ai.explainer import Explanation, explain_finding
+from app.ai.fixer import FixError, Proposal, propose_fix
 from app.parser.project_parser import ProjectInfo, parse_project
 from app.scanners import (
     bandit_scanner,
@@ -70,5 +71,17 @@ def explain(req: ExplainRequest):
         raise HTTPException(status_code=400, detail=f"Not a folder: {req.project_path}")
     try:
         return explain_finding(req.finding, root)
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"AI request failed: {e}")
+
+@app.post("/propose-fix", response_model=Proposal)
+def propose(req: ExplainRequest):
+    root = Path(req.project_path)
+    if not root.is_dir():
+        raise HTTPException(status_code=400, detail=f"Not a folder: {req.project_path}")
+    try:
+        return propose_fix(req.finding, root)
+    except FixError as e:
+        raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=503, detail=f"AI request failed: {e}")

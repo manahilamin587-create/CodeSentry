@@ -8,6 +8,7 @@ from app.ai.explainer import Explanation, explain_finding
 from app.ai.fixer import FixError, Proposal, propose_fix
 from app.db import get_proposal, init_db, save_proposal, set_status
 from app.models.finding import Finding
+from fastapi.middleware.cors import CORSMiddleware
 from app.parser.project_parser import ProjectInfo, parse_project
 from app.scanners import (
     bandit_scanner,
@@ -18,6 +19,13 @@ from app.scanners import (
 
 app = FastAPI(title="CodeSentry", version="0.1.0")
 init_db()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 SCANNERS = {
     "bandit": bandit_scanner.scan,

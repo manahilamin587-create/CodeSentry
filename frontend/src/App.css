@@ -1,0 +1,259 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.header p {
+  margin: 4px 0 20px;
+  color: #5b6475;
+}
+
+.scan-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.scan-bar input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #c9ced8;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: 1px solid #c9ced8;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) {
+  background: #eef0f4;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  background: #2f5bea;
+  border-color: #2f5bea;
+  color: #fff;
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #2449c4;
+}
+
+.btn.approve {
+  background: #1f8a4c;
+  border-color: #1f8a4c;
+  color: #fff;
+}
+
+.btn.approve:hover:not(:disabled) {
+  background: #187040;
+}
+
+.btn.reject {
+  background: #fff;
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.error {
+  background: #fdecea;
+  border: 1px solid #f5b5ae;
+  color: #8a1f14;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.warn {
+  background: #fff7e0;
+  border: 1px solid #f0d58a;
+  color: #6b5200;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #dde1e8;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.finding {
+  padding: 10px;
+  border: 1px solid #e3e6ec;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.finding:hover {
+  background: #f6f8fc;
+}
+
+.finding.active {
+  border-color: #2f5bea;
+  background: #eef2ff;
+}
+
+.finding .top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.finding .loc {
+  font-size: 12px;
+  color: #5b6475;
+  font-family: Consolas, monospace;
+}
+
+.finding .msg {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+}
+
+.badge.HIGH {
+  background: #c0392b;
+}
+
+.badge.MEDIUM {
+  background: #d98200;
+}
+
+.badge.LOW {
+  background: #6b7a90;
+}
+
+.tool {
+  font-size: 12px;
+  color: #5b6475;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.card {
+  border: 1px solid #e3e6ec;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  background: #fafbfd;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.card p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+pre {
+  margin: 8px 0 0;
+  padding: 10px;
+  background: #1e2230;
+  color: #e6e9f2;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 13px;
+}
+
+.diff {
+  padding: 0;
+  overflow: hidden;
+}
+
+.diff div {
+  padding: 1px 10px;
+  white-space: pre;
+}
+
+.diff .add {
+  background: #12361f;
+  color: #7ee2a0;
+}
+
+.diff .del {
+  background: #3c1a1a;
+  color: #ff9b9b;
+}
+
+.diff .hunk {
+  color: #8fb4ff;
+}
+
+.status {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #e3e6ec;
+}
+
+.status.applied {
+  background: #d3f1de;
+  color: #166a3a;
+}
+
+.status.rejected {
+  background: #fadcd8;
+  color: #8a1f14;
+}
+
+.empty {
+  color: #5b6475;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

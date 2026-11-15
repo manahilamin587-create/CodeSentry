@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from app.models.finding import Finding
+from app.ai.explainer import Explanation, explain_finding
 from app.parser.project_parser import ProjectInfo, parse_project
 from app.scanners import (
     bandit_scanner,
@@ -56,3 +57,18 @@ def scan_project(req: ScanRequest):
     unique = {f.id: f for f in findings}
     ordered = sorted(unique.values(), key=lambda f: (f.file, f.line))
     return ScanResponse(project=project, findings=ordered, tool_errors=tool_errors)
+
+class ExplainRequest(BaseModel):
+    project_path: str
+    finding: Finding
+
+
+@app.post("/explain", response_model=Explanation)
+def explain(req: ExplainRequest):
+    root = Path(req.project_path)
+    if not root.is_dir():
+        raise HTTPException(status_code=400, detail=f"Not a folder: {req.project_path}")
+    try:
+        return explain_finding(req.finding, root)
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"AI request failed: {e}")
